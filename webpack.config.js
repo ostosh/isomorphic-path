@@ -6,6 +6,8 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'isomoprhic-path.js',
+        library: 'isomoprhic-path',
+        libraryTarget: 'umd'
     },
     resolve: {
         extensions: ['.ts', '.js']

@@ -6,6 +6,8 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'temp/test'),
         filename: 'runner.js',
+        library: 'runner',
+        libraryTarget: 'umd'
     },
     resolve: {
         extensions: ['.ts', '.js']
