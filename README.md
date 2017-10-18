@@ -1,5 +1,5 @@
 # isomorphic-path
-A wrapper module exposes node's path API in the browser and node context.
+A wrapper module that exposes node's path API in the browser and node contexts.
 
 Supported Methods:
  * normalize
