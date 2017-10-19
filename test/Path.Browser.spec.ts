@@ -1,7 +1,6 @@
 import * as tsUnit from 'ts-unit';
 import * as isomorphicPath from '../lib/index';
 
-
 export class PathSpec extends tsUnit.TestClass {
     testDefaultExport() {
       delete require.cache[require.resolve('../lib/path')];
@@ -135,9 +134,6 @@ export class PathSpec extends tsUnit.TestClass {
       this.areIdentical('C:\\temp\\\\foo\\bar\\..\\', isomorphicPath.posix.normalize('C:\\temp\\\\foo\\bar\\..\\'), 'posix should not normalize windows path');
       this.areIdentical('/foo/bar/baz/asdf', isomorphicPath.posix.normalize('/foo/bar//baz/asdf/quux/..'), 'posix should normalize posix path to posix seperator');
     }
-    testWin32Resolve() {
-      this.throws(isomorphicPath.win32.resolve, 'win32 should throw error on calling unsupported resolve method');
-    }
     testWin32Parse() {
       const parsedPosix = isomorphicPath.win32.parse('/home/user/dir/file.txt');
       this.areIdentical('/', parsedPosix.root, 'win32 should parse posix path root');
@@ -153,7 +149,7 @@ export class PathSpec extends tsUnit.TestClass {
       this.areIdentical('.txt', parsedWindows.ext, 'win32 should parse windows path ext');
       this.areIdentical('file', parsedWindows.name, 'win32 should parse windows path name');
     }
-    testPosixResolve() {
+    testPosixParse() {
       const parsedPosix = isomorphicPath.posix.parse('/home/user/dir/file.txt');
       this.areIdentical('/', parsedPosix.root, 'posix should parse posix path root');
       this.areIdentical('/home/user/dir', parsedPosix.dir, 'posix should parse posix path dir');
@@ -168,12 +164,16 @@ export class PathSpec extends tsUnit.TestClass {
       this.areIdentical('.txt', parsedWindows.ext, 'posix should parse windows path ext');
       this.areIdentical('C:\\path\\dir\\file', parsedWindows.name, 'posix should parse windows path name');
     }
+    testWin32Resolve() {
+      this.throws(isomorphicPath.win32.resolve, 'win32 should throw error on calling unsupported resolve method');
+    }
+    testPosixResolve() {
+      this.throws(isomorphicPath.posix.resolve, 'posix should throw error on calling unsupported resolve method');
+    }
     testWin32Relative() {
-      this.throws(isomorphicPath.win32.relative, 'win32 should throw error on calling unsupported resolve method');
+      this.throws(isomorphicPath.win32.relative.bind('', ''), 'win32 should throw error on calling unsupported resolve method');
     }
     testPosixRelative() {
-      this.throws(isomorphicPath.posix.relative, 'posix should throw error on calling unsupported resolve method');
+      this.throws(isomorphicPath.posix.relative.bind('', ''), 'posix should throw error on calling unsupported resolve method');
     }
-
-
 }

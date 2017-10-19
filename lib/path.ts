@@ -1,6 +1,6 @@
 /// <reference path="../typings/path.d.ts" />
 import { win32 as win32Base, posix as posixBase } from 'path/path';
-import { isPc } from './os';
+import { isPc, isBrowser } from './platform';
 import { noop } from './noop';
 
 export interface ParsedPath {
@@ -31,8 +31,8 @@ const unsupportedMethods = {
   relative: noop
 };
 
-const win32 = Object.assign({}, win32Base, unsupportedMethods);
-const posix = Object.assign({}, posixBase, unsupportedMethods);
+const win32 = Object.assign({}, win32Base, isBrowser() ? unsupportedMethods : {});
+const posix = Object.assign({}, posixBase,  isBrowser() ? unsupportedMethods : {});
 const defaultExport = Object.assign({}, isPc() ? win32 : posix);
 
 export default defaultExport;

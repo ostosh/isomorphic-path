@@ -2,11 +2,14 @@ const path = require('path');
 
 module.exports = {
     devtool: 'inline-source-map',
-    entry: './test/index.ts',
+    entry: {
+  		nodeRunner: './test/Runner.Node.ts',
+  		browserRunner: './test/Runner.Browser.ts'
+  	},
     output: {
         path: path.resolve(__dirname, 'temp/test'),
-        filename: 'runner.js',
-        library: 'runner',
+    		filename: '[name].js',
+        library: '[name]',
         libraryTarget: 'umd'
     },
     resolve: {

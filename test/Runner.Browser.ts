@@ -1,10 +1,10 @@
 import * as tsUnit from 'ts-unit';
-import { PathSpec } from './Path.spec';
-import { OsSpec } from './Os.spec';
+import { PathSpec } from './Path.Browser.spec';
+import { PlatformSpec } from './Platform.Browser.spec';
 
 const IsomorphicPathTests = [
     PathSpec,
-    OsSpec
+    PlatformSpec
 ];
 var test = new tsUnit.Test(IsomorphicPathTests);
 var result = test.run();

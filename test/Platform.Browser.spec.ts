@@ -1,7 +1,7 @@
 import * as tsUnit from 'ts-unit';
-import { isPc, isMac } from '../lib/os';
+import { isPc, isMac, isNode, isBrowser } from '../lib/platform';
 
-export class OsSpec extends tsUnit.TestClass {
+export class PlatformSpec extends tsUnit.TestClass {
     testOs() {
       (window.navigator as any).__defineGetter__('platform', () => 'Windows');//stub platform call
       this.isTrue(isPc(), 'isPc should return true for windows platform id: "Widnows"');
@@ -15,5 +15,9 @@ export class OsSpec extends tsUnit.TestClass {
       (window.navigator as any).__defineGetter__('platform', () => 'MacIntel');//stub platform call
       this.isFalse(isPc(), 'isPc should return false for mac platform id: "MacIntel"');
       this.isTrue(isMac(), 'isMac should return true for mac platform id: "MacIntel"');
+    }
+    testEnv() {
+      this.isFalse(isNode(), 'isNode should return false for browser spec');
+      this.isTrue(isBrowser(), 'isBrowser should return true for browser spec');
     }
 }
