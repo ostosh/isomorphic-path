@@ -3,6 +3,10 @@
   "version": "0.0.2",
   "description": "",
   "main": "dist/isomoprhic-path.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/ostosh/isomorphic-path.git"
+  },
   "scripts": {
     "build-dist": "webpack",
     "build-test": "webpack --config webpack.config.test.js",
