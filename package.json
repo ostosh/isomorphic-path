@@ -1,6 +1,6 @@
 {
   "name": "isomorphic-path",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "node's path module packaged for the browser and node",
   "main": "dist/isomorphic-path.js",
   "browser": "dist/isomorphic-path.browser.js",
