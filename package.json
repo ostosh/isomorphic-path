@@ -7,6 +7,7 @@
     "type" : "git",
     "url" : "https://github.com/ostosh/isomorphic-path.git"
   "browser": "dist//isomorphic-path.browser.js",
+  "types": "./isomorphic-path.d.ts",
   },
   "scripts": {
     "build-decl": "tsc --declaration lib/index.ts",
