@@ -1,17 +1,15 @@
 {
   "name": "isomorphic-path",
   "version": "0.0.3",
-  "description": "",
+  "description": "node's path module packaged for the browser and node",
   "main": "dist/isomorphic-path.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/ostosh/isomorphic-path.git"
   "browser": "dist//isomorphic-path.browser.js",
   "types": "./isomorphic-path.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ostosh/isomorphic-path.git"
   },
   "scripts": {
-    "build-decl": "tsc --declaration lib/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
     "build-dist": "webpack && webpack --config webpack.config.browser.js",
     "build-test": "webpack --config webpack.config.test.js && webpack --config webpack.config.browser.test.js"
   },
