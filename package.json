@@ -6,12 +6,13 @@
   "repository" : {
     "type" : "git",
     "url" : "https://github.com/ostosh/isomorphic-path.git"
+  "browser": "dist//isomorphic-path.browser.js",
   },
   "scripts": {
-    "build-dist": "webpack",
-    "build-test": "webpack --config webpack.config.test.js",
     "build-decl": "tsc --declaration lib/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
+    "build-dist": "webpack && webpack --config webpack.config.browser.js",
+    "build-test": "webpack --config webpack.config.test.js && webpack --config webpack.config.browser.test.js"
   },
   "author": "Geoffrey J Ostosh",
   "license": "MIT",

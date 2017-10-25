@@ -1,10 +1,10 @@
 const path = require('path');
 
 module.exports = {
+    target: 'node',
     devtool: 'inline-source-map',
     entry: {
-  		nodeRunner: './test/Runner.Node.ts',
-  		browserRunner: './test/Runner.Browser.ts'
+  		nodeRunner: './test/Runner.Node.ts'
   	},
     output: {
         path: path.resolve(__dirname, 'temp/test'),

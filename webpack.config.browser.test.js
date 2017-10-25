@@ -1,13 +1,14 @@
 const path = require('path');
 
 module.exports = {
-    target: 'node',
     devtool: 'inline-source-map',
-    entry: './lib/index.ts',
+    entry: {
+  		browserRunner: './test/Runner.Browser.ts'
+  	},
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'isomorphic-path.js',
-        library: 'isomorphic-path',
+        path: path.resolve(__dirname, 'temp/test'),
+    		filename: '[name].js',
+        library: '[name]',
         libraryTarget: 'umd'
     },
     resolve: {
