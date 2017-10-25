@@ -1,3 +1,4 @@
 import path from './path';
-export * from './path'
+import { win32, posix, ParsedPath } from './path';
 export default path;
+export { win32, posix, ParsedPath };
