@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "description": "node's path module packaged for the browser and node",
   "main": "dist/isomorphic-path.js",
-  "browser": "dist//isomorphic-path.browser.js",
+  "browser": "dist/isomorphic-path.browser.js",
   "types": "./isomorphic-path.d.ts",
   "repository": {
     "type": "git",
