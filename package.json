@@ -16,10 +16,11 @@
   "author": "Geoffrey J Ostosh",
   "license": "MIT",
   "dependencies": {
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
     "@types/node": "^8.0.44",
-    "path": "^0.12.7",
     "ts-loader": "^2.3.7",
     "ts-unit": "^1.0.1"
-  },
-  "devDependencies": {}
+  }
 }
