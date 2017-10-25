@@ -5,8 +5,8 @@ module.exports = {
     entry: './lib/index.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'isomoprhic-path.js',
-        library: 'isomoprhic-path',
+        filename: 'isomorphic-path.js',
+        library: 'isomorphic-path',
         libraryTarget: 'umd'
     },
     resolve: {
