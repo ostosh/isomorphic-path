@@ -1,6 +1,6 @@
 {
   "name": "isomorphic-path",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "node's path module packaged for the browser and node",
   "main": "dist/isomorphic-path.js",
   "browser": "dist/isomorphic-path.browser.js",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/node": "^8.0.44",
     "ts-loader": "^2.3.7",
-    "ts-unit": "^1.0.1"
+    "ts-unit": "^1.0.1",
+    "typescript": "2.5.3"
   }
 }
