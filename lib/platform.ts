@@ -1,9 +1,9 @@
 export const isMac = (): boolean => {
-  if(process
+  if (process
   && typeof process.platform === 'string'
   && process.platform.toLowerCase() === 'darwin') {
     return true;
-  } else if(typeof navigator !== 'undefined'
+  } else if (typeof navigator !== 'undefined'
   && typeof navigator.platform === 'string'
   && navigator.platform.toLowerCase().indexOf('mac') > -1) {
     return true;
@@ -13,11 +13,11 @@ export const isMac = (): boolean => {
 };
 
 export const isPc = (): boolean => {
-  if(process
+  if (process
   && typeof process.platform === 'string'
   && process.platform.toLowerCase() === 'win32') {
     return true;
-  } else if(typeof navigator !== 'undefined'
+  } else if (typeof navigator !== 'undefined'
     && typeof navigator.platform === 'string'
     && navigator.platform.toLowerCase().indexOf('win') > -1) {
     return true;

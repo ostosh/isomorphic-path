@@ -3,10 +3,11 @@ import { PathSpec } from './Path.Browser.spec';
 import { PlatformSpec } from './Platform.Browser.spec';
 
 const IsomorphicPathTests = [
-    PathSpec,
-    PlatformSpec
+  PathSpec,
+  PlatformSpec,
 ];
-var test = new tsUnit.Test(IsomorphicPathTests);
-var result = test.run();
-result.showResults('results');    // Display in the element with id="results"
+const test = new tsUnit.Test(IsomorphicPathTests);
+const result = test.run();
+result.showResults('results');
+// tslint:disable-next-line
 console.log(result.getTapResults());

@@ -4,34 +4,50 @@ import * as isomorphicPath from '../lib/index';
 export class PathSpec extends tsUnit.TestClass {
     testDefaultExport() {
       delete require.cache[require.resolve('../lib/path')];
-      (window.navigator as any).__defineGetter__('platform', () => 'Windows');//stub platform call
+      (window.navigator as any).__defineGetter__('platform', () => 'Windows'); // stub platform call
       let path = require('../lib/path').default;
-        this.areIdentical('\\', path.sep, 'default seperator should be win32 "\\" after in windows environment');
-        this.areIdentical(';', path.delimiter, 'default delimiter should be win32 ";" after in windows environment');
+      this.areIdentical('\\', path.sep, 'default separator should be win32 "\\" after in windows environment');
+      this.areIdentical(';', path.delimiter, 'default delimiter should be win32 ";" after in windows environment');
       delete require.cache[require.resolve('../lib/path')];
-      (window.navigator as any).__defineGetter__('platform', () => 'Win16');//stub platform call
+      (window.navigator as any).__defineGetter__('platform', () => 'Win16'); // stub platform call
       path = require('../lib/path').default;
-        this.areIdentical('\\', path.sep, 'default seperator should be win32 "\\" after in windows environment');
-        this.areIdentical(';', path.delimiter, 'default delimiter should be win32 ";" after in windows environment');
+      this.areIdentical('\\', path.sep, 'default separator should be win32 "\\" after in windows environment');
+      this.areIdentical(';', path.delimiter, 'default delimiter should be win32 ";" after in windows environment');
       delete require.cache[require.resolve('../lib/path')];
-      (window.navigator as any).__defineGetter__('platform', () => 'Macintosh');//stub platform call
+      (window.navigator as any).__defineGetter__('platform', () => 'Macintosh'); // stub platform call
       path = require('../lib/path').default;
-        this.areIdentical('/', path.sep, 'default seperator should be posix "/" after in mac environment');
-        this.areIdentical(':', path.delimiter, 'default delimiter should be posix "/" after in mac environment');
+      this.areIdentical('/', path.sep, 'default separator should be posix "/" after in mac environment');
+      this.areIdentical(':', path.delimiter, 'default delimiter should be posix "/" after in mac environment');
       delete require.cache[require.resolve('../lib/path')];
-      (window.navigator as any).__defineGetter__('platform', () => 'MacIntel');//stub platform call
+      (window.navigator as any).__defineGetter__('platform', () => 'MacIntel'); // stub platform call
       path = require('../lib/path').default;
-        this.areIdentical('/', path.sep, 'default seperator should be posix "/" after in mac environment');
-        this.areIdentical(':', path.delimiter, 'default delimiter should be posix "/" after in mac environment');
+      this.areIdentical('/', path.sep, 'default separator should be posix "/" after in mac environment');
+      this.areIdentical(':', path.delimiter, 'default delimiter should be posix "/" after in mac environment');
     }
 
     testWin32Basename() {
-			this.areIdentical('myfile.html', isomorphicPath.win32.basename('C:\\temp\\myfile.html'), 'win32 basename should parse file name from windows path');
-			this.areIdentical('myfile.html', isomorphicPath.win32.basename('/temp/myfile.html'), 'win32 basename should parse file name from posix path');
+      this.areIdentical(
+        'myfile.html',
+        isomorphicPath.win32.basename('C:\\temp\\myfile.html'),
+        'win32 basename should parse file name from windows path',
+      );
+      this.areIdentical(
+        'myfile.html',
+        isomorphicPath.win32.basename('/temp/myfile.html'),
+        'win32 basename should parse file name from posix path',
+      );
     }
     testPosixBasename() {
-      this.areIdentical('C:\\temp\\myfile.html', isomorphicPath.posix.basename('C:\\temp\\myfile.html'), 'posix basename should not parse windows path');
-      this.areIdentical('myfile.html', isomorphicPath.posix.basename('/temp/myfile.html'), 'posix basename should parse file name from posix path');
+      this.areIdentical(
+        'C:\\temp\\myfile.html',
+        isomorphicPath.posix.basename('C:\\temp\\myfile.html'),
+        'posix basename should not parse windows path',
+      );
+      this.areIdentical(
+        'myfile.html',
+        isomorphicPath.posix.basename('/temp/myfile.html'),
+        'posix basename should parse file name from posix path',
+      );
     }
     testWin32Sep() {
       this.areIdentical('\\', isomorphicPath.win32.sep, 'win32 should correctly implement "\\" sep');
@@ -46,93 +62,239 @@ export class PathSpec extends tsUnit.TestClass {
       this.areIdentical(':', isomorphicPath.posix.delimiter, 'posix should correctly implement ";" delimiter');
     }
     testWin32Dirname() {
-      this.areIdentical('C:\\temp', isomorphicPath.win32.dirname('C:\\temp\\myfile.html'), 'win32 dirname should parse parent directory path from windows path');
-      this.areIdentical('/temp', isomorphicPath.win32.dirname('/temp/myfile.html'), 'win32 dirname should parse parent directory path from posix path');
+      this.areIdentical(
+        'C:\\temp',
+        isomorphicPath.win32.dirname('C:\\temp\\myfile.html'),
+        'win32 dirname should parse parent directory path from windows path',
+      );
+      this.areIdentical(
+        '/temp',
+        isomorphicPath.win32.dirname('/temp/myfile.html'),
+        'win32 dirname should parse parent directory path from posix path',
+      );
     }
     testPosixDirname() {
-      this.areIdentical('.', isomorphicPath.posix.dirname('C:\\temp\\myfile.html'), 'posix basename should not parse windows path');
-      this.areIdentical('/temp', isomorphicPath.posix.dirname('/temp/myfile.html'), 'posix dirname should parse parent directory path from posix path');
+      this.areIdentical(
+        '.',
+        isomorphicPath.posix.dirname('C:\\temp\\myfile.html'),
+        'posix basename should not parse windows path',
+      );
+      this.areIdentical(
+        '/temp',
+        isomorphicPath.posix.dirname('/temp/myfile.html'),
+        'posix dirname should parse parent directory path from posix path',
+      );
     }
     testWin32Extname() {
-      this.areIdentical('.html', isomorphicPath.win32.extname('C:\\temp\\myfile.html'), 'win32 extname should parse extension from windows path');
-      this.areIdentical('.html', isomorphicPath.win32.extname('/temp/myfile.html'), 'win32 extname should parse parent extension path from posix path');
-      this.areIdentical('.js', isomorphicPath.win32.extname('C:\\temp\\myfile.js'), 'win32 extname should parse extension from windows path');
-      this.areIdentical('.js', isomorphicPath.win32.extname('/temp/myfile.html.js'), 'win32 extname should parse parent extension path from posix path');
-      this.areIdentical('.js', isomorphicPath.win32.extname('C:\\temp\\myfile.html.js'), 'win32 extname should parse pre-fixed extension from windows path');
-      this.areIdentical('.js', isomorphicPath.win32.extname('/temp/myfile.html.html.js'), 'win32 extname should parse pre-fixed parent extension path from posix path');
+      this.areIdentical(
+        '.html',
+        isomorphicPath.win32.extname('C:\\temp\\myfile.html'),
+        'win32 extname should parse extension from windows path',
+      );
+      this.areIdentical(
+        '.html',
+        isomorphicPath.win32.extname('/temp/myfile.html'),
+        'win32 extname should parse parent extension path from posix path',
+      );
+      this.areIdentical(
+        '.js',
+        isomorphicPath.win32.extname('C:\\temp\\myfile.js'),
+        'win32 extname should parse extension from windows path',
+      );
+      this.areIdentical(
+        '.js',
+        isomorphicPath.win32.extname('/temp/myfile.html.js'),
+        'win32 extname should parse parent extension path from posix path',
+      );
+      this.areIdentical(
+        '.js',
+        isomorphicPath.win32.extname('C:\\temp\\myfile.html.js'),
+        'win32 extname should parse pre-fixed extension from windows path',
+      );
+      this.areIdentical(
+        '.js',
+        isomorphicPath.win32.extname('/temp/myfile.html.html.js'),
+        'win32 extname should parse pre-fixed parent extension path from posix path',
+      );
     }
     testPosixExtname() {
-      //TODO failure in path implementation where posix handles windows file path by coincidence of inplementation
-      //this.areIdentical('.', isomorphicPath.posix.extname('C:\\temp\\myfile.html'), 'posix basename should not parse windows path');
-      this.areIdentical('.html', isomorphicPath.posix.extname('/temp/myfile.html'), 'posix extname should parse parent extension path from posix path');
-      this.areIdentical('.js', isomorphicPath.posix.extname('/temp/myfile.html.js'), 'posix extname should parse parent extension path from posix path');
-      this.areIdentical('.js', isomorphicPath.posix.extname('/temp/myfile.html.html.js'), 'posix extname should parse pre-fixed parent extension path from posix path');
+      this.areIdentical(
+        '.html',
+        isomorphicPath.posix.extname('/temp/myfile.html'),
+        'posix extname should parse parent extension path from posix path',
+      );
+      this.areIdentical(
+        '.js',
+        isomorphicPath.posix.extname('/temp/myfile.html.js'),
+        'posix extname should parse parent extension path from posix path',
+      );
+      this.areIdentical(
+        '.js',
+        isomorphicPath.posix.extname('/temp/myfile.html.html.js'),
+        'posix extname should parse pre-fixed parent extension path from posix path',
+      );
     }
     testWin32Format() {
       this.areIdentical('/home/user/dir\\file.txt', isomorphicPath.win32.format({
         dir: '/home/user/dir',
-        base: 'file.txt'
+        base: 'file.txt',
       } as isomorphicPath.ParsedPath), 'win32 format should not format posix ParsedPath');
       this.areIdentical('path\\dir\\file.txt', isomorphicPath.win32.format({
         root: 'C:\\',
         dir: 'path\\dir',
-        base: 'file.txt'
+        base: 'file.txt',
       } as isomorphicPath.ParsedPath), 'win32 format should format windows ParsedPath with root and dir');
       this.areIdentical('C:\\path\\dir\\file.txt', isomorphicPath.win32.format({
         dir: 'C:\\path\\dir',
-        base: 'file.txt'
+        base: 'file.txt',
       } as isomorphicPath.ParsedPath), 'win32 format should format windows ParsedPath with dir');
     }
     testPosixFormat() {
       this.areIdentical('C:\\path\\dir/file.txt', isomorphicPath.posix.format({
         dir: 'C:\\path\\dir',
-        base: 'file.txt'
+        base: 'file.txt',
       } as isomorphicPath.ParsedPath), 'posix format should not format windows ParsedPath');
       this.areIdentical('/home/user/dir/file.txt', isomorphicPath.posix.format({
         root: '/ignored',
         dir: '/home/user/dir',
-        base: 'file.txt'
+        base: 'file.txt',
       } as isomorphicPath.ParsedPath), 'posix format should format posix ParsedPath with root and dir');
       this.areIdentical('/home/user/dir/file.txt', isomorphicPath.posix.format({
         dir: '/home/user/dir',
-        base: 'file.txt'
+        base: 'file.txt',
       } as isomorphicPath.ParsedPath), 'posix format should format posix ParsedPath with dir');
     }
     testWin32Absolute() {
-      this.areIdentical(true, isomorphicPath.win32.isAbsolute('//server'), 'win32 isAbsolute should return true for posix absolute path');
-      this.areIdentical(true, isomorphicPath.win32.isAbsolute('\\\\server'), 'win32 isAbsolute should return true for windows absolute path');
-      this.areIdentical(true, isomorphicPath.win32.isAbsolute('C:/foo/..'), 'win32 isAbsolute should return true for windows absolute path');
-      this.areIdentical(true, isomorphicPath.win32.isAbsolute('C:\\foo\\..'), 'win32 isAbsolute should return true for windows absolute path');
-      this.areIdentical(false, isomorphicPath.win32.isAbsolute('bar\\baz'), 'win32 isAbsolute should return false for windows relative path');
-      this.areIdentical(false, isomorphicPath.win32.isAbsolute('bar/baz'), 'win32 isAbsolute should return true for relative posix path');
-      this.areIdentical(false, isomorphicPath.win32.isAbsolute('.'), 'win32 isAbsolute should return false for relative posix operator');
+      this.areIdentical(
+        true,
+        isomorphicPath.win32.isAbsolute('//server'),
+        'win32 isAbsolute should return true for posix absolute path',
+      );
+      this.areIdentical(
+        true,
+        isomorphicPath.win32.isAbsolute('\\\\server'),
+        'win32 isAbsolute should return true for windows absolute path',
+      );
+      this.areIdentical(
+        true,
+        isomorphicPath.win32.isAbsolute('C:/foo/..'),
+        'win32 isAbsolute should return true for windows absolute path',
+      );
+      this.areIdentical(
+        true,
+        isomorphicPath.win32.isAbsolute('C:\\foo\\..'),
+        'win32 isAbsolute should return true for windows absolute path',
+      );
+      this.areIdentical(
+        false,
+        isomorphicPath.win32.isAbsolute('bar\\baz'),
+        'win32 isAbsolute should return false for windows relative path',
+      );
+      this.areIdentical(
+        false,
+        isomorphicPath.win32.isAbsolute('bar/baz'),
+        'win32 isAbsolute should return true for relative posix path',
+      );
+      this.areIdentical(
+        false,
+        isomorphicPath.win32.isAbsolute('.'),
+        'win32 isAbsolute should return false for relative posix operator',
+      );
     }
     testPosixAbsolute() {
-      this.areIdentical(true, isomorphicPath.posix.isAbsolute('//server'), 'posix isAbsolute should return true for posix absolute path');
-      this.areIdentical(true, isomorphicPath.posix.isAbsolute('/baz/..'), 'posix isAbsolute should return true for posix absolute path with relative operator suffix');
-      this.areIdentical(false, isomorphicPath.posix.isAbsolute('\\\\server'), 'posix isAbsolute should return false for windows absolute path');
-      this.areIdentical(false, isomorphicPath.posix.isAbsolute('C:/foo/..'), 'posix isAbsolute should return false for windows absolute path');
-      this.areIdentical(false, isomorphicPath.posix.isAbsolute('C:\\foo\\..'), 'posix isAbsolute should return false for windows absolute path');
-      this.areIdentical(false, isomorphicPath.posix.isAbsolute('bar\\baz'), 'win32 isAbsolute should return false for windows relative path');
-      this.areIdentical(false, isomorphicPath.posix.isAbsolute('bar/baz'), 'win32 isAbsolute should return true for relative posix path');
-      this.areIdentical(false, isomorphicPath.posix.isAbsolute('.'), 'win32 isAbsolute should return true for relative posix operator');
+      this.areIdentical(
+        true,
+        isomorphicPath.posix.isAbsolute('//server'),
+        'posix isAbsolute should return true for posix absolute path',
+      );
+      this.areIdentical(
+        true,
+        isomorphicPath.posix.isAbsolute('/baz/..'),
+        'posix isAbsolute should return true for posix absolute path with relative operator suffix',
+      );
+      this.areIdentical(
+        false,
+        isomorphicPath.posix.isAbsolute('\\\\server'),
+        'posix isAbsolute should return false for windows absolute path',
+      );
+      this.areIdentical(
+        false,
+        isomorphicPath.posix.isAbsolute('C:/foo/..'),
+        'posix isAbsolute should return false for windows absolute path',
+      );
+      this.areIdentical(
+        false,
+        isomorphicPath.posix.isAbsolute('C:\\foo\\..'),
+        'posix isAbsolute should return false for windows absolute path',
+      );
+      this.areIdentical(
+        false,
+        isomorphicPath.posix.isAbsolute('bar\\baz'),
+        'win32 isAbsolute should return false for windows relative path',
+      );
+      this.areIdentical(
+        false,
+        isomorphicPath.posix.isAbsolute('bar/baz'),
+        'win32 isAbsolute should return true for relative posix path',
+      );
+      this.areIdentical(
+        false,
+        isomorphicPath.posix.isAbsolute('.'),
+        'win32 isAbsolute should return true for relative posix operator',
+      );
     }
     testWin32Join() {
-      this.areIdentical('C:\\foo\\bar\\baz\\asdf', isomorphicPath.win32.join('C:\\foo', 'bar', 'baz\\asdf', 'quux', '..'), 'win32 join should return joined windows path given windows fragments');
-      this.areIdentical('\\foo\\bar\\baz\\asdf', isomorphicPath.win32.join('/foo', 'bar', 'baz/asdf', 'quux', '..'), 'win32 join should return joined windows path given posix fragments');
+      this.areIdentical(
+        'C:\\foo\\bar\\baz\\asdf',
+        isomorphicPath.win32.join('C:\\foo', 'bar', 'baz\\asdf', 'quux', '..'),
+        'win32 join should return joined windows path given windows fragments',
+      );
+      this.areIdentical(
+        '\\foo\\bar\\baz\\asdf',
+        isomorphicPath.win32.join('/foo', 'bar', 'baz/asdf', 'quux', '..'),
+        'win32 join should return joined windows path given posix fragments',
+      );
     }
     testPosixJoin() {
-      this.areIdentical('\\foo/bar/baz\\asdf', isomorphicPath.posix.join('\\foo', 'bar', 'baz\\asdf', 'quux', '..'), 'posix join should not return joined posix path given windows fragments');
-      this.areIdentical('/foo/bar/baz/asdf', isomorphicPath.posix.join('/foo', 'bar', 'baz/asdf', 'quux', '..'), 'posix join should return joined posix path');
+      this.areIdentical(
+        '\\foo/bar/baz\\asdf',
+        isomorphicPath.posix.join('\\foo', 'bar', 'baz\\asdf', 'quux', '..'),
+        'posix join should not return joined posix path given windows fragments',
+      );
+      this.areIdentical(
+        '/foo/bar/baz/asdf',
+        isomorphicPath.posix.join('/foo', 'bar', 'baz/asdf', 'quux', '..'),
+        'posix join should return joined posix path',
+      );
     }
     testWin32Normalize() {
-      this.areIdentical('C:\\temp\\foo\\bar', isomorphicPath.win32.normalize('C:////temp\\\\/\\/\\/foo/bar'), 'win32 should normalize mixed path to windows seperator');
-      this.areIdentical('C:\\temp\\foo\\', isomorphicPath.win32.normalize('C:\\temp\\\\foo\\bar\\..\\'), 'win32 should normalize windows path to windows seperator');
-      this.areIdentical('\\foo\\bar\\baz\\asdf', isomorphicPath.win32.normalize('/foo/bar//baz/asdf/quux/..'), 'wind32 should normalize posix path to windows seperator');
+      this.areIdentical(
+        'C:\\temp\\foo\\bar',
+        isomorphicPath.win32.normalize('C:////temp\\\\/\\/\\/foo/bar'),
+        'win32 should normalize mixed path to windows separator',
+      );
+      this.areIdentical(
+        'C:\\temp\\foo\\',
+        isomorphicPath.win32.normalize('C:\\temp\\\\foo\\bar\\..\\'),
+        'win32 should normalize windows path to windows separator',
+      );
+      this.areIdentical(
+        '\\foo\\bar\\baz\\asdf',
+        isomorphicPath.win32.normalize('/foo/bar//baz/asdf/quux/..'),
+        'wind32 should normalize posix path to windows separator',
+      );
     }
     testPosixNormalize() {
-      this.areIdentical('C:\\temp\\\\foo\\bar\\..\\', isomorphicPath.posix.normalize('C:\\temp\\\\foo\\bar\\..\\'), 'posix should not normalize windows path');
-      this.areIdentical('/foo/bar/baz/asdf', isomorphicPath.posix.normalize('/foo/bar//baz/asdf/quux/..'), 'posix should normalize posix path to posix seperator');
+      this.areIdentical(
+        'C:\\temp\\\\foo\\bar\\..\\',
+        isomorphicPath.posix.normalize('C:\\temp\\\\foo\\bar\\..\\'),
+        'posix should not normalize windows path',
+      );
+      this.areIdentical(
+        '/foo/bar/baz/asdf',
+        isomorphicPath.posix.normalize('/foo/bar//baz/asdf/quux/..'),
+        'posix should normalize posix path to posix separator',
+      );
     }
     testWin32Parse() {
       const parsedPosix = isomorphicPath.win32.parse('/home/user/dir/file.txt');
@@ -171,9 +333,15 @@ export class PathSpec extends tsUnit.TestClass {
       this.throws(isomorphicPath.posix.resolve, 'posix should throw error on calling unsupported resolve method');
     }
     testWin32Relative() {
-      this.throws(isomorphicPath.win32.relative.bind('', ''), 'win32 should throw error on calling unsupported resolve method');
+      this.throws(
+        isomorphicPath.win32.relative.bind('', ''),
+        'win32 should throw error on calling unsupported resolve method',
+      );
     }
     testPosixRelative() {
-      this.throws(isomorphicPath.posix.relative.bind('', ''), 'posix should throw error on calling unsupported resolve method');
+      this.throws(
+        isomorphicPath.posix.relative.bind('', ''),
+        'posix should throw error on calling unsupported resolve method',
+      );
     }
 }
