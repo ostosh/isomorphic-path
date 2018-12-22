@@ -1,5 +1,5 @@
 import * as tsUnit from 'ts-unit';
-import * as isomorphicPath from '../lib/index';
+import * as isomorphicPath from '../';
 
 export class PathSpec extends tsUnit.TestClass {
     testDefaultExport() {
@@ -322,10 +322,10 @@ export class PathSpec extends tsUnit.TestClass {
         isomorphicPath.win32.resolve('C:\\foo\\bar', '.\\baz'),
         'win32 should resolve windows path',
       );
-      this.areIdentical(
+      this.areNotIdentical(
         '\\foo\\bar\\baz',
         isomorphicPath.win32.resolve('/foo/bar', './baz'),
-        'win32 should resolve posix path to windows format',
+        'win32 should not resolve posix path to windows format',
       );
     }
     testPosixResolve() {

@@ -12,5 +12,5 @@ Supported Methods (see official API: https://nodejs.org/api/path.html):
  * extname
  * format
  * parse
- * resolve (node only; throws exception in browser mode; browser support TBD)
- * relative (node only; throws exception in browser mode; browser support TBD)
+ * resolve (node only; throws exception in browser mode)
+ * relative (node only; throws exception in browser mode)

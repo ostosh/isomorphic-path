@@ -1,10 +1,12 @@
 {
   "name": "isomorphic-path",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "node's path module packaged for the browser and node",
-  "main": "dist/isomorphic-path.js",
-  "browser": "dist/isomorphic-path.browser.js",
-  "types": "./isomorphic-path.d.ts",
+  "main": "./dist/isomorphic-path.js",
+  "browser": {
+    "./dist/isomorphic-path.js": "./dist/isomorphic-path.browser.js"
+  },
+  "typings": "./isomorphic-path.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/ostosh/isomorphic-path.git"
@@ -22,6 +24,7 @@
     "@types/node": "^8.0.44",
     "ts-loader": "^2.3.7",
     "ts-unit": "^1.0.1",
-    "typescript": "2.5.3"
+    "typescript": "2.5.3",
+    "webpack": "2.6.1"
   }
 }

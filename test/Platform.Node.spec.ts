@@ -1,13 +1,13 @@
 import * as tsUnit from 'ts-unit';
-import { isPc, isMac, isNode, isBrowser } from '../lib/platform';
+import { isWin, isMac, isNode, isBrowser } from '../lib/platform';
 
 export class PlatformSpec extends tsUnit.TestClass {
     testOs() {
-      (process as any).__defineGetter__('platform', () => 'win32');//stub platform call
-      this.isTrue(isPc(), 'isPc should return true for windows platform id: "win32"');
+      (process as any).__defineGetter__('platform', () => 'win32'); // stub platform call
+      this.isTrue(isWin(), 'isWin should return true for windows platform id: "win32"');
       this.isFalse(isMac(), 'isMac should return false for windows platform id: "win32"');
-      (process as any).__defineGetter__('platform', () => 'darwin');//stub platform call
-      this.isFalse(isPc(), 'isPc should return false for mac platform id: "darwin"');
+      (process as any).__defineGetter__('platform', () => 'darwin'); // stub platform call
+      this.isFalse(isWin(), 'isWin should return false for mac platform id: "darwin"');
       this.isTrue(isMac(), 'isMac should return true for mac platform id: "darwin"');
     }
     testEnv() {

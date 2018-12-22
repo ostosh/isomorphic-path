@@ -12,7 +12,7 @@ export const isMac = (): boolean => {
   }
 };
 
-export const isPc = (): boolean => {
+export const isWin = (): boolean => {
   if (process
   && typeof process.platform === 'string'
   && process.platform.toLowerCase() === 'win32') {

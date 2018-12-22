@@ -1,5 +1,5 @@
 import * as tsUnit from 'ts-unit';
-import * as isomorphicPath from '../lib/index';
+import * as isomorphicPath from '../';
 
 export class PathSpec extends tsUnit.TestClass {
     testDefaultExport() {
