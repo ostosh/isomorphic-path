@@ -1,5 +1,5 @@
 import { win32 as win32Base, posix as posixBase } from 'path/path';
-import { isWin } from './platform';
+import { isWin, isBrowser } from './platform';
 import { noop } from './noop';
 
 const unsupportedMethods = {
@@ -10,11 +10,16 @@ const unsupportedMethods = {
 const win32Runtime = win32Base;
 const posixRuntime = posixBase;
 
+win32Runtime.resolve.prototype = unsupportedMethods.resolve;
+win32Runtime.relative.prototype = unsupportedMethods.relative;
+posixRuntime.resolve.prototype = unsupportedMethods.resolve;
+posixRuntime.relative.prototype = unsupportedMethods.relative;
+
 let defaultExport;
 if (isWin()) {
-  defaultExport = Object.assign({}, win32Runtime);
+  defaultExport = Object.assign({}, win32Base);
 } else {
-  defaultExport = Object.assign({}, posixRuntime);
+  defaultExport = Object.assign({}, posixBase);
 }
 let normalizeRuntime;
 let joinRuntime;

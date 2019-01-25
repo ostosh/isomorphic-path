@@ -4,7 +4,8 @@
   "description": "node's path module packaged for the browser and node",
   "main": "./dist/isomorphic-path.js",
   "browser": {
-    "./dist/isomorphic-path.js": "./dist/isomorphic-path.browser.js"
+    "./dist/isomorphic-path.js": "./dist/isomorphic-path.browser.js",
+    "./lib/path.ts": "./lib/path.browser.ts"
   },
   "typings": "./isomorphic-path.d.ts",
   "repository": {
