@@ -322,10 +322,10 @@ export class PathSpec extends tsUnit.TestClass {
         isomorphicPath.win32.resolve('C:\\foo\\bar', '.\\baz'),
         'win32 should resolve windows path',
       );
-      this.areNotIdentical(
+      this.areIdentical(
         '\\foo\\bar\\baz',
         isomorphicPath.win32.resolve('/foo/bar', './baz'),
-        'win32 should not resolve posix path to windows format',
+        'win32 should resolve posix path to windows format',
       );
     }
     testPosixResolve() {

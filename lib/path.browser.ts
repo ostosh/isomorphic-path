@@ -7,13 +7,8 @@ const unsupportedMethods = {
   relative: noop,
 };
 
-const win32Runtime = win32Base;
-const posixRuntime = posixBase;
-
-win32Runtime.resolve.prototype = unsupportedMethods.resolve;
-win32Runtime.relative.prototype = unsupportedMethods.relative;
-posixRuntime.resolve.prototype = unsupportedMethods.resolve;
-posixRuntime.relative.prototype = unsupportedMethods.relative;
+const win32Runtime = Object.assign({}, win32Base, unsupportedMethods);
+const posixRuntime = Object.assign({}, posixBase, unsupportedMethods);
 
 let defaultExport;
 if (isWin()) {
