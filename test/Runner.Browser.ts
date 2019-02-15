@@ -1,8 +1,10 @@
 import * as tsUnit from 'ts-unit';
+import { ExportSpec } from './Export.spec';
 import { PathSpec } from './Path.Browser.spec';
 import { PlatformSpec } from './Platform.Browser.spec';
 
 const IsomorphicPathTests = [
+  ExportSpec,
   PathSpec,
   PlatformSpec,
 ];

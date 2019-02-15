@@ -10,11 +10,11 @@ const unsupportedMethods = {
 const win32Runtime = win32Base;
 const posixRuntime = posixBase;
 
-let defaultExport;
+let defaultExport = {win32: win32Runtime, posix: posixRuntime};
 if (isWin()) {
-  defaultExport = Object.assign({}, win32Runtime);
+  defaultExport = Object.assign({}, defaultExport, win32Runtime);
 } else {
-  defaultExport = Object.assign({}, posixRuntime);
+  defaultExport = Object.assign({}, defaultExport, posixRuntime);
 }
 let normalizeRuntime;
 let joinRuntime;
@@ -67,7 +67,7 @@ export {
   dirnameRuntime as dirname,
   basenameRuntime as basename,
   extnameRuntime as extname,
-  sepRuntime as sepRuntime,
+  sepRuntime as sep,
   delimiterRuntime as delimiter,
   parseRuntime as parse,
   formatRuntime as format,
